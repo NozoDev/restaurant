@@ -9,7 +9,7 @@ const handleJWTError = () => {
   return new AppError('Tu token a caducado! por favor ingresa de nuevo', 401);
 };
 
-const castError = () => {
+const castError23505 = () => {
   new AppError('Valor de campo duplicado: utilice otro valor', 400);
 };
 
@@ -41,5 +41,25 @@ const sendError = (err, res) => {
 
 const ErrorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'failgi';
+  err.status = err.status || 'fallo';
+
+  if (process.env.NODE_ENV === 'development') {
+    sendErrorDev(err, res);
+
+    if (process.env.NODE_ENV === 'production') {
+      let error = { ...err };
+
+      if (!error.parent?.code) {
+        error = err;
+      }
+
+      if (error.parent?.code === '23505') error = castError23505();
+      if (error.name === 'TokenExpired') error = JWTExpiredError();
+      if (error.name === 'JsonWebTokenError') error = handleJWTError();
+    }
+
+    sendError(error, res);
+  }
 };
+
+module.exports = ErrorHandler;
