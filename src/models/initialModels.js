@@ -4,7 +4,7 @@ const Orden = require('./orden.model');
 const Reviews = require('./review.model');
 const Restaurant = require('./restaurant.model');
 
-const initModel = () => {
+const initialModel = () => {
   Users.hasMany(Orden);
   Orden.belongsTo(Users);
 
@@ -21,4 +21,4 @@ const initModel = () => {
   Reviews.belongsTo(Restaurant);
 };
 
-module.exports = initModel;
+module.exports = initialModel;

@@ -2,7 +2,7 @@ const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const Users = require('../models/users.model');
 const Reviews = require('../models/review.model');
-const Orden = require('../models/orden.model');
+const Ordens = require('../models/orden.model');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -72,7 +72,7 @@ exports.protectAccounByOrden = catchAsync(async (req, res, next) => {
   const { sessionUser } = req;
   const { id } = req.params;
 
-  const orden = await Orden.findOne({
+  const orden = await Ordens.findOne({
     where: { id },
   });
 

@@ -29,9 +29,7 @@ exports.validRestaurant = catchAsync(async (req, res, next) => {
   });
 
   if (!restaurant) {
-    return next(
-      new AppError(`Restaurante con id:${id} no fue encontrado`, 404)
-    );
+    return next(new AppError(`el restaurante con ${id} no fue encotrado 😔`, 404));
   }
 
   req.food = restaurant.food;
@@ -54,7 +52,7 @@ exports.validReview = catchAsync(async (req, res, next) => {
   });
 
   if (!review) {
-    return next(new AppError(`No se encontró la reseña`, 404));
+    return next(new AppError(`el review no fue encontrado 😔`, 404));
   }
 
   req.review = review;

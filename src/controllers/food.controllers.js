@@ -26,17 +26,17 @@ exports.findFood = catchAsync(async (req, res, next) => {
 });
 
 exports.findFoodById = catchAsync(async (req, res, next) => {
-  const { food } = req;
+  const { foods } = req;
 
   res.status(201).json({
     status: 'status',
-    food,
+    foods,
   });
 });
 
 exports.newFood = catchAsync(async (req, res, next) => {
   const { name, price } = req.body;
-  const { id } = req.body;
+  const { id } = req.params;
   const { restaurant } = req;
 
   const foodInDB = await Food.findOne({
@@ -49,41 +49,41 @@ exports.newFood = catchAsync(async (req, res, next) => {
     return next(new AppError('Ya existe una comida con este nombre', 409));
   }
 
-  const food = await Food.create({
+  const foods = await Food.create({
     name,
     price,
-    restaurantId: id,
+    restaurantId: id
   });
 
   res.status(201).json({
     status: 'success',
     message: 'La comida fue creada',
-    food: {
-      id: food.id,
-      name: food.name,
-      price: food.price,
+    foods: {
+      id: foods.id,
+      name: foods.name,
+      price: foods.price,
       restaurant: restaurant.name,
     },
   });
 });
 
 exports.updateFood = catchAsync(async (req, res, next) => {
-  const { food } = req;
+  const { foods } = req;
   const { name, price } = req.body;
 
-  const updateFood = await food.update({ name, price });
+  const updateFoods = await foods.update({ name, price });
 
   res.status(201).json({
     status: 'success',
     message: 'la comida fue actualizada',
-    updateFood,
+    updateFoods,
   });
 });
 
 exports.deleteFood = catchAsync(async (req, res, next) => {
-  const { food } = req;
+  const { foods } = req;
 
-  await food.update({ status: 'disabled' });
+  await foods.update({ status: 'disabled' });
 
   res.status(201).json({
     status: 'success',

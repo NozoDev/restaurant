@@ -8,11 +8,11 @@ const ordenMiddleware = require('../middlewares/orden.middleware');
 const { Router } = require('express');
 const router = Router();
 
-router.use(authMiddleware.protect);
+// router.use(authMiddleware.protect);
 
 router.post(
   '/',
-  validationsMiddleware.ordenValidation,
+  // validationsMiddleware.ordenValidation,
   ordenController.createOrden
 );
 

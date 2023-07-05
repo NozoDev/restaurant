@@ -136,6 +136,6 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'exitoso',
-    message: `usuario con el id:${user.id} ha sido eliminado`,
+    message: `usuario con el id:${user.id} ha sido encontrado`,
   });
 });

@@ -24,7 +24,7 @@ exports.createOrden = catchAsync(async (req, res, next) => {
   });
 
   if (!food) {
-    return next(new AppError('esa comida no existe', 404));
+    return next(new AppError('Esa comida no existe', 404));
   }
 
   const priceTotal = food.price * quantity;
@@ -71,11 +71,10 @@ exports.findOrden = catchAsync(async (req, res, next) => {
           {
             model: Restaurant,
             attributes: {
-              exlude: ['status', 'updateAt', 'createdAt'],
+              exclude: ['status', 'updatedAt', 'createdAt'],
             },
           },
         ],
-
         attributes: {
           exclude: [
             'status',
@@ -89,7 +88,7 @@ exports.findOrden = catchAsync(async (req, res, next) => {
     ],
   });
 
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
     results: orden.length,
     orden,
@@ -100,9 +99,9 @@ exports.updateOrden = catchAsync(async (req, res, next) => {
   const { orden } = req;
 
   const updatedOrden = await orden.update({ status: 'completed' });
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
-    message: 'la orden fue exitosa',
+    message: 'La orden se actualizó exitosamente',
     updatedOrden: {
       id: orden.id,
       totalPrice: orden.totalPrice,
@@ -111,7 +110,6 @@ exports.updateOrden = catchAsync(async (req, res, next) => {
     },
   });
 });
-
 exports.deleteOrden = catchAsync(async (req, res, next) => {
   const { orden } = req;
 
