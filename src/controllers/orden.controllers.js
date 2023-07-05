@@ -30,7 +30,7 @@ exports.createOrden = catchAsync(async (req, res, next) => {
   const priceTotal = food.price * quantity;
 
   const order = await Orden.create({
-    mealId,
+    foodId,
     quantity,
     priceTotal,
     userId: id,
@@ -62,7 +62,7 @@ exports.findOrden = catchAsync(async (req, res, next) => {
       userId: sessionUser.id,
     },
     attributes: {
-      exclude: ['status', 'mealId', 'userId', 'updatedAt', 'createdAt'],
+      exclude: ['status', 'foodId', 'userId', 'updatedAt', 'createdAt'],
     },
     include: [
       {

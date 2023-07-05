@@ -12,8 +12,8 @@ router.get('/', foodController.findFood);
 
 router.post(
   '/:id',
-  authMiddleware.protect,
-  authMiddleware.restrictTo('admin'),
+  // authMiddleware.protect,
+  // authMiddleware.restrictTo('admin'),
   validationsMiddleware.FoodValidation,
   restaurantMiddleware.validRestaurant,
   foodController.newFood

@@ -95,10 +95,10 @@ exports.ordenValidation = [
     .withMessage('Quantity cannot be empty.')
     .isInt()
     .withMessage('Quantity must be a number'),
-  body('mealId')
+  body('foodId')
     .notEmpty()
-    .withMessage('mealId cannot be empty.')
+    .withMessage('foodId cannot be empty.')
     .isInt()
-    .withMessage('mealId must be a number'),
+    .withMessage('foodId must be a number'),
   validFields,
 ];

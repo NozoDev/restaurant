@@ -21,7 +21,7 @@ exports.findFood = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     results: food.length,
-    meals,
+    food,
   });
 });
 
@@ -39,7 +39,7 @@ exports.newFood = catchAsync(async (req, res, next) => {
   const { id } = req.body;
   const { restaurant } = req;
 
-  const foodInDB = await Food.finOne({
+  const foodInDB = await Food.findOne({
     where: {
       name,
     },
@@ -49,7 +49,7 @@ exports.newFood = catchAsync(async (req, res, next) => {
     return next(new AppError('Ya existe una comida con este nombre', 409));
   }
 
-  const food = await Food.createe({
+  const food = await Food.create({
     name,
     price,
     restaurantId: id,

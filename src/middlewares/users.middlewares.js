@@ -35,7 +35,7 @@ exports.validSessionUser = catchAsync(async (req, res, next) => {
       {
         model: Orden,
         attributes: {
-          exclude: ['mealId', 'userId', 'status', 'updatedAt', 'createdAt'],
+          exclude: ['foodId', 'userId', 'status', 'updatedAt', 'createdAt'],
         },
         include: [
           {

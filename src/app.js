@@ -15,8 +15,8 @@ const ErrorHandler = require('./controllers/error.controllers');
 
 const usersRouter = require('./routes/users.routes');
 const ordenRouter = require('./routes/orden.routes');
-const foodRouter = require('./routes/food.routes');
 const restaurantRouter = require('./routes/restaurant.routes');
+const foodRouter = require('./routes/food.routes');
 
 const app = express();
 const limiter = rateLimit({

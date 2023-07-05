@@ -23,13 +23,13 @@ router.post(
 router.use(authMiddleware.protect);
 
 router.get(
-  '/orders',
+  '/orden',
   usersMiddleware.validSessionUser,
   usersController.OrdenUser
 );
 
 router.get(
-  '/orders/:id',
+  '/orden/:id',
   usersMiddleware.validSessionUser,
   usersController.OneOrden
 );

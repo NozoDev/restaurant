@@ -27,9 +27,9 @@ exports.findRestaurant = catchAsync(async (req, res, next) => {
 });
 
 exports.newRestaurant = catchAsync(async (req, res, next) => {
-  const { name, andress, rating } = req.body;
+  const { name, address, rating } = req.body;
 
-  const restaurantInDb = await Restaurant.findOnde({
+  const restaurantInDb = await Restaurant.findOne({
     where: {
       address: address.toLowerCase(),
     },

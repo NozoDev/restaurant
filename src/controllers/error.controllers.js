@@ -23,7 +23,7 @@ const sendErrorDev = (err, res) => {
   });
 };
 
-const sendError = (err, res) => {
+const sendErrorProd = (err, res) => {
   logger.info(err);
 
   if (err.isOperational) {
@@ -41,24 +41,26 @@ const sendError = (err, res) => {
 
 const ErrorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'fallo';
+  err.status = err.status || 'fail';
 
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
+  }
 
-    if (process.env.NODE_ENV === 'production') {
-      let error = { ...err };
+  if (process.env.NODE_ENV === 'production') {
+    let error = { ...err };
 
-      if (!error.parent?.code) {
-        error = err;
-      }
-
-      if (error.parent?.code === '23505') error = castError23505();
-      if (error.name === 'TokenExpired') error = JWTExpiredError();
-      if (error.name === 'JsonWebTokenError') error = handleJWTError();
+    if (!error.parent?.code) {
+      error = err;
     }
 
-    sendError(error, res);
+    if (error.parent?.code === '23505') error = castError23505();
+    if (error.name === 'TokenExpiredError') error = JWTExpiredError();
+    if (error.name === 'JsonWebTokenError') error = handleJWTError();
+
+    /* valid errors */
+
+    sendErrorProd(error, res);
   }
 };
 
